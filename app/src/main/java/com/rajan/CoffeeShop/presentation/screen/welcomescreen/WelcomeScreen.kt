@@ -66,7 +66,7 @@ fun WelcomeScreen(navController: NavController) {
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
             )
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
                     scope.launch {
@@ -82,6 +82,23 @@ fun WelcomeScreen(navController: NavController) {
                     containerColor = LightBrown
                 )) {
                 Text(text = "Get Started",
+                    fontSize = 16.sp)
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = {
+                    scope.launch {
+                        navController.navigate(Routes.LoginScreen) {
+                            popUpTo(Routes.WelcomeScreen) { inclusive = true }
+                        }
+                    }
+                },
+                modifier = Modifier.fillMaxWidth().height(50.dp),
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = LightBrown
+                )) {
+                Text(text = "Login",
                     fontSize = 16.sp)
             }
         }

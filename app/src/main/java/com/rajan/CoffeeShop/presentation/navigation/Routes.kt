@@ -18,5 +18,8 @@ sealed class Routes {
 
     @Serializable
     object FavouriteScreen : Routes()
+
+    @Serializable
+    object LoginScreen : Routes()
 }
 

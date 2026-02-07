@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CoffeeShop</string>
+    <string name="login">Login</string>
+    <string name="header_text">It\'s time to create some thing new! \n Login to your account and keep creating</string>
 </resources>

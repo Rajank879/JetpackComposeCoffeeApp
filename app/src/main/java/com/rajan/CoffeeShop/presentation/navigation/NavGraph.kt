@@ -13,6 +13,7 @@ import com.rajan.CoffeeShop.presentation.screen.cartscreen.CartScreen
 import com.rajan.CoffeeShop.presentation.screen.detailsscreen.DetailsScreen
 import com.rajan.CoffeeShop.presentation.screen.favouritescreen.FavouriteScreen
 import com.rajan.CoffeeShop.presentation.screen.homeScreen.HomeScreen
+import com.rajan.CoffeeShop.presentation.screen.loginscreen.LoginScreen
 import com.rajan.CoffeeShop.presentation.screen.profilescreen.ProfileScreen
 import com.rajan.CoffeeShop.presentation.screen.welcomescreen.WelcomeScreen
 
@@ -37,6 +38,7 @@ fun NavGraph() {
         composable<Routes.CartScreen> { CartScreen(navController) }
         composable<Routes.FavouriteScreen> { FavouriteScreen(navController) }
         composable<Routes.ProfileScreen> { ProfileScreen(navController) }
+        composable<Routes.LoginScreen> { LoginScreen(navController) }
 
     }
 }

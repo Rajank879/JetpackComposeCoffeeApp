@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
-    alias (libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -58,6 +58,9 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    // Use explicit, versioned artifacts for Material icons to ensure availability
+    implementation("androidx.compose.material:material-icons-core:1.5.0")
+    implementation("androidx.compose.material:material-icons-extended:1.5.0")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
     // DataStore Preferences for onboarding flag storage
