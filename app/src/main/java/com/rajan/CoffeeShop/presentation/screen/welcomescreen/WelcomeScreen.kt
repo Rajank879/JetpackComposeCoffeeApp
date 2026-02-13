@@ -34,8 +34,9 @@ import com.rajan.CoffeeShop.presentation.theme.LightBrown
 import kotlinx.coroutines.launch
 import androidx.compose.ui.platform.LocalContext
 
+
 @Composable
-fun WelcomeScreen(navController: NavController) {
+fun WelcomeScreen(navController: NavController, viewModel: WelcomeScreenViewModel) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -76,13 +77,18 @@ fun WelcomeScreen(navController: NavController) {
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth().height(50.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = LightBrown
-                )) {
-                Text(text = "Get Started",
-                    fontSize = 16.sp)
+                )
+            ) {
+                Text(
+                    text = "Get Started",
+                    fontSize = 16.sp
+                )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
@@ -93,13 +99,18 @@ fun WelcomeScreen(navController: NavController) {
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth().height(50.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = LightBrown
-                )) {
-                Text(text = "Login",
-                    fontSize = 16.sp)
+                )
+            ) {
+                Text(
+                    text = "Login",
+                    fontSize = 16.sp
+                )
             }
         }
     }

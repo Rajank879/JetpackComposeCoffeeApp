@@ -8,7 +8,7 @@ import com.rajan.CoffeeShop.domain.model.Product
 import com.rajan.CoffeeShop.R
 
 @Composable
-fun DetailsScreen(productId: Int, navController: NavController) {
+fun DetailsScreen(productId: Int, navController: NavController, viewModel: DetailsScreenViewModel) {
     val products = listOf(
         Product(
             id = 1,
@@ -61,13 +61,13 @@ fun DetailsScreen(productId: Int, navController: NavController) {
         ),
     )
     val selectedProduct = products.find { it.id == productId }
-    if (selectedProduct == null){
+    if (selectedProduct == null) {
         navController.popBackStack()
         return
     }
     Scaffold(
         topBar = { DetailsScreenTopbar(navController) },
         bottomBar = { DetailsScreenBottomBar() }) { innerPadding ->
-        ProductDetailContent(selectedProduct,innerPadding)
+        ProductDetailContent(selectedProduct, innerPadding)
     }
 }

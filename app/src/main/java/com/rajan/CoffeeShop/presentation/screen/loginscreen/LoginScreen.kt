@@ -20,10 +20,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+//import androidx.compose.material.icons.filled.Visibility
+//import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,7 +38,10 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -43,7 +49,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -59,37 +64,51 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.rajan.CoffeeShop.R
+import com.rajan.CoffeeShop.common.utils.NetworkResult
+import com.rajan.CoffeeShop.data.remote.model.LoginResponse
 import com.rajan.CoffeeShop.presentation.navigation.Routes
+import com.rajan.CoffeeShop.presentation.ui_components.FullScreenLoader
 import kotlinx.coroutines.launch
 
-@Composable
-fun LoginScreen(navController: NavController) {
-    val passwordVisibility = rememberSaveable { mutableStateOf(false) }
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
-    val navigateHome = {
-        scope.launch {
-//            OnboardingDataStore.setHasSeenWelcome(context, true)
-            navController.navigate(Routes.HomeScreen) {
-                popUpTo(Routes.LoginScreen) { inclusive = true }
+@Composable
+fun LoginScreen(navController: NavController, viewModel: LoginScreenViewModel) {
+    val passwordVisibility = rememberSaveable { mutableStateOf(false) }
+    val uiState by viewModel.uiState.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
+    LaunchedEffect(uiState) {
+        when(uiState){
+            is NetworkResult.Loading -> {
+
             }
+            is NetworkResult.Error -> {
+                snackbarHostState.showSnackbar((uiState as NetworkResult.Error).message)
+            }
+            is NetworkResult.Success -> {
+                navController.navigate(Routes.HomeScreen) {
+                    popUpTo(Routes.LoginScreen) { inclusive = true }
+                }
+            }
+            else -> Unit
         }
     }
 
     UserClick(
         onLoginClick = {
-            navigateHome()
+            viewModel.onLoginClick()
         },
         onGoogleLogin = {
-            navigateHome()
+            viewModel.onLoginClick()
         },
         onAppleLogin = {
-            navigateHome()
+            viewModel.onLoginClick()
         },
         onSignUpClick = {},
         onForgotPasswordClick = {},
-        pwdVisibility = passwordVisibility
+        pwdVisibility = passwordVisibility,
+        viewModel = viewModel,
+        snackbarHostState,
+        uiState
     )
 
 }
@@ -101,9 +120,11 @@ fun UserClick(
     onAppleLogin: () -> Unit,
     onSignUpClick: () -> Unit,
     onForgotPasswordClick: () -> Unit,
-    pwdVisibility: MutableState<Boolean>
+    pwdVisibility: MutableState<Boolean>,
+    viewModel: LoginScreenViewModel,
+    snackbarHostState: SnackbarHostState,
+    uiState: NetworkResult<LoginResponse>
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) { paddingValues ->
         Surface(
@@ -111,23 +132,21 @@ fun UserClick(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            if (uiState is NetworkResult.Loading) {
+                FullScreenLoader()
+            }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                val emailInput = rememberSaveable { mutableStateOf("") }
-                val isEmailValid = remember(emailInput.value) {
-                    Patterns.EMAIL_ADDRESS.matcher(emailInput.value).matches()
+                val isEmailValid = remember(viewModel.email) {
+                    Patterns.EMAIL_ADDRESS.matcher(viewModel.email).matches()
                 }
-                val showEmailError = emailInput.value.isNotEmpty() && !isEmailValid
-
-                val passwordInput = remember { mutableStateOf("") }
-                val isPasswordValid = passwordInput.value.length >= 6
-                val showPasswordError = passwordInput.value.isNotEmpty() && !isPasswordValid
-
-
+                val showEmailError = viewModel.email.isNotEmpty() && !isEmailValid
+                val isPasswordValid = viewModel.password.length >= 6
+                val showPasswordError = viewModel.password.isNotEmpty() && !isPasswordValid
                 val visualTransformation =
                     if (pwdVisibility.value) VisualTransformation.None else PasswordVisualTransformation()
 
@@ -150,8 +169,8 @@ fun UserClick(
 
                 // TextField
                 OutlinedTextField(
-                    value = emailInput.value,
-                    onValueChange = { emailInput.value = it },
+                    value = viewModel.email,
+                    onValueChange = { viewModel.onEmailChange(it) },
                     label = { Text(text = "Email") },
                     isError = showEmailError,
                     supportingText = {
@@ -190,8 +209,8 @@ fun UserClick(
 
                 //Password TextField
                 OutlinedTextField(
-                    value = passwordInput.value,
-                    onValueChange = { passwordInput.value = it },
+                    value = viewModel.password,
+                    onValueChange = { viewModel.onPasswordChange(it) },
                     label = { Text(text = "Password") },
                     isError = showPasswordError,
                     supportingText = {
@@ -218,7 +237,7 @@ fun UserClick(
                                 )
                                 {
                                     Icon(
-                                        imageVector = if (pwdVisibility.value) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                                        imageVector = if (pwdVisibility.value) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
                                         contentDescription = null,
                                         tint = Color.Unspecified
                                     )
@@ -276,19 +295,19 @@ fun UserClick(
                 Button(
                     onClick = {
                         when {
-                            emailInput.value.isEmpty() && passwordInput.value.isEmpty() -> {
+                            viewModel.email.isEmpty() && viewModel.password.isEmpty() -> {
                                 scope.launch {
                                     snackbarHostState.showSnackbar("Please enter email and password")
                                 }
                             }
 
-                            emailInput.value.isEmpty() -> {
+                            viewModel.email.isEmpty() -> {
                                 scope.launch {
                                     snackbarHostState.showSnackbar("Please enter email")
                                 }
                             }
 
-                            passwordInput.value.isEmpty() -> {
+                            viewModel.password.isEmpty() -> {
                                 scope.launch {
                                     snackbarHostState.showSnackbar("Please enter password")
                                 }
@@ -306,12 +325,20 @@ fun UserClick(
                         contentColor = MaterialTheme.colorScheme.primaryContainer
                     )
                 ) {
-                    Text(
-                        text = "Login",
-                        style = MaterialTheme.typography.labelLarge,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    if (uiState is NetworkResult.Loading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(20.dp),
+                            strokeWidth = 2.dp
+                        )
+                    } else {
+                        Text(
+                            text = "Login",
+                            style = MaterialTheme.typography.labelLarge,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
                 }
                 Spacer(modifier = Modifier.height(32.dp))
 

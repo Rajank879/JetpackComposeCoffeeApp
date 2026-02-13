@@ -19,14 +19,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rajan.CoffeeShop.presentation.theme.IvoryWhite
 import com.rajan.CoffeeShop.presentation.theme.LightBrown
 import com.rajan.CoffeeShop.presentation.ui_components.AppMessageDialog
 
-@Preview(showBackground = true)
+
 @Composable
 fun DetailsScreenBottomBar() {
     var showCartDialog by remember { mutableStateOf(false) }

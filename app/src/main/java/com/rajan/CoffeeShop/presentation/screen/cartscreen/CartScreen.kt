@@ -22,7 +22,7 @@ import com.rajan.CoffeeShop.presentation.theme.LightBrown
 import com.rajan.CoffeeShop.presentation.ui_components.MyBottomNavBar
 
 @Composable
-fun CartScreen(navController: NavController) {
+fun CartScreen(navController: NavController, viewModel: CartViewModel) {
     // Displaying Product
     val cartProducts = listOf(
         Product(
@@ -52,7 +52,8 @@ fun CartScreen(navController: NavController) {
     val deliveryFee = 1.00
     val totalAmount = amount + deliveryFee
 
-    Scaffold(topBar = { CartScreenTopBar(navController, "Order") },
+    Scaffold(
+        topBar = { CartScreenTopBar(navController, "Order") },
         bottomBar = { MyBottomNavBar(navController, "Cart") }) { innerPadding ->
         LazyColumn(
             Modifier

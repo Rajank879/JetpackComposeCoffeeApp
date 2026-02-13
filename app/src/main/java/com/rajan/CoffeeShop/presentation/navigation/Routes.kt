@@ -2,24 +2,27 @@ package com.rajan.CoffeeShop.presentation.navigation
 
 import kotlinx.serialization.Serializable
 
-sealed class Routes {
+
+sealed interface Routes {
     @Serializable
-    object WelcomeScreen : Routes()
-    @Serializable
-    object HomeScreen : Routes()
-    @Serializable
-    data class DetailsScreen(val productId: Int) : Routes()
+    object WelcomeScreen : Routes
 
     @Serializable
-    object CartScreen : Routes()
+    object HomeScreen : Routes
 
     @Serializable
-    object ProfileScreen : Routes()
+    data class DetailsScreen(val productId: Int) : Routes
 
     @Serializable
-    object FavouriteScreen : Routes()
+    object CartScreen : Routes
 
     @Serializable
-    object LoginScreen : Routes()
+    object ProfileScreen : Routes
+
+    @Serializable
+    object FavouriteScreen : Routes
+
+    @Serializable
+    object LoginScreen : Routes
 }
 

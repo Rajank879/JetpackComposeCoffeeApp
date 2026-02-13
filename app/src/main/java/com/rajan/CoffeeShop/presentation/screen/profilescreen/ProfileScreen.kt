@@ -43,7 +43,7 @@ import com.rajan.CoffeeShop.presentation.theme.LightGray
 import com.rajan.CoffeeShop.presentation.ui_components.MyBottomNavBar
 
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun ProfileScreen(navController: NavController, viewModel: ProfileScreenViewModel) {
 
 
     Scaffold(

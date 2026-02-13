@@ -32,7 +32,7 @@ import com.rajan.CoffeeShop.domain.model.Product
 import com.rajan.CoffeeShop.presentation.ui_components.MyBottomNavBar
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, viewModel: HomeViewModel) {
     val location = "Bellandur, Bengaluru"
     Scaffold(bottomBar = {
         MyBottomNavBar(navController, "Home")

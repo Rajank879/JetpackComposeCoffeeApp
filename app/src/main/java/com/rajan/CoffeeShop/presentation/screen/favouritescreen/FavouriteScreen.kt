@@ -21,36 +21,44 @@ import com.rajan.CoffeeShop.presentation.screen.cartscreen.CartScreenTopBar
 import com.rajan.CoffeeShop.presentation.ui_components.MyBottomNavBar
 
 @Composable
-fun FavouriteScreen(navController : NavController) {
-    var favouriteProducts by remember { mutableStateOf(listOf(
-        Product(
-            id = 1,
-            name = "Espresso",
-            description = "Strong & Rich",
-            price = 3.80,
-            imageRes = R.drawable.coffee_1
-        ),
-        Product(
-            id = 2,
-            name = "Latte",
-            description = "Smooth & Creamy",
-            price = 4.80,
-            imageRes = R.drawable.coffee_2
-        ),
-        Product(
-            id = 3,
-            name = "Copuccino",
-            description = "With Chocolate",
-            price = 6.80,
-            imageRes = R.drawable.coffee_3
+fun FavouriteScreen(navController: NavController, viewModel: FavouriteScreenViewModel) {
+    var favouriteProducts by remember {
+        mutableStateOf(
+            listOf(
+                Product(
+                    id = 1,
+                    name = "Espresso",
+                    description = "Strong & Rich",
+                    price = 3.80,
+                    imageRes = R.drawable.coffee_1
+                ),
+                Product(
+                    id = 2,
+                    name = "Latte",
+                    description = "Smooth & Creamy",
+                    price = 4.80,
+                    imageRes = R.drawable.coffee_2
+                ),
+                Product(
+                    id = 3,
+                    name = "Copuccino",
+                    description = "With Chocolate",
+                    price = 6.80,
+                    imageRes = R.drawable.coffee_3
+                )
+            )
         )
-    )) }
+    }
 
-    Scaffold(topBar = {CartScreenTopBar(navController, "Wishlist") },
-        bottomBar = {MyBottomNavBar(navController, "Favourite")}) {
-        LazyColumn(modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp).padding(it)) {
+    Scaffold(
+        topBar = { CartScreenTopBar(navController, "Wishlist") },
+        bottomBar = { MyBottomNavBar(navController, "Favourite") }) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .padding(it)
+        ) {
 
             item {
                 Spacer(modifier = Modifier.height(24.dp))
