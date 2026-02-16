@@ -1,7 +1,7 @@
 package com.rajan.CoffeeShop.di
 
-import com.rajan.CoffeeShop.data.remote.ApiConstants.BASE_URL
-import com.rajan.CoffeeShop.data.remote.AuthApi
+import com.rajan.CoffeeShop.data.remote.api.ApiConstants.BASE_URL
+import com.rajan.CoffeeShop.data.remote.api.AuthApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

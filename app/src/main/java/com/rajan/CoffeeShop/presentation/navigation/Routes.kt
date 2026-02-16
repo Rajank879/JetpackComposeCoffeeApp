@@ -24,5 +24,8 @@ sealed interface Routes {
 
     @Serializable
     object LoginScreen : Routes
+
+    @Serializable
+    object SignupScreen : Routes
 }
 

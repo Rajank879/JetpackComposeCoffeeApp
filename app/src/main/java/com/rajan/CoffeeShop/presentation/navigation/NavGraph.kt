@@ -6,27 +6,28 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.rajan.CoffeeShop.data.OnboardingDataStore
-import com.rajan.CoffeeShop.presentation.screen.cartscreen.CartScreen
-import com.rajan.CoffeeShop.presentation.screen.cartscreen.CartViewModel
-import com.rajan.CoffeeShop.presentation.screen.detailsscreen.DetailsScreen
-import com.rajan.CoffeeShop.presentation.screen.detailsscreen.DetailsScreenViewModel
-import com.rajan.CoffeeShop.presentation.screen.favouritescreen.FavouriteScreen
-import com.rajan.CoffeeShop.presentation.screen.favouritescreen.FavouriteScreenViewModel
-import com.rajan.CoffeeShop.presentation.screen.homeScreen.HomeScreen
-import com.rajan.CoffeeShop.presentation.screen.homeScreen.HomeViewModel
-import com.rajan.CoffeeShop.presentation.screen.loginscreen.LoginScreen
-import com.rajan.CoffeeShop.presentation.screen.loginscreen.LoginScreenViewModel
-import com.rajan.CoffeeShop.presentation.screen.profilescreen.ProfileScreen
-import com.rajan.CoffeeShop.presentation.screen.profilescreen.ProfileScreenViewModel
-import com.rajan.CoffeeShop.presentation.screen.welcomescreen.WelcomeScreen
-import com.rajan.CoffeeShop.presentation.screen.welcomescreen.WelcomeScreenViewModel
+import com.rajan.CoffeeShop.data.local.datastore.OnboardingDataStore
+import com.rajan.CoffeeShop.presentation.feature.cartscreen.CartScreen
+import com.rajan.CoffeeShop.presentation.feature.cartscreen.CartViewModel
+import com.rajan.CoffeeShop.presentation.feature.detailsscreen.DetailsScreen
+import com.rajan.CoffeeShop.presentation.feature.detailsscreen.DetailsScreenViewModel
+import com.rajan.CoffeeShop.presentation.feature.favouritescreen.FavouriteScreen
+import com.rajan.CoffeeShop.presentation.feature.favouritescreen.FavouriteScreenViewModel
+import com.rajan.CoffeeShop.presentation.feature.homeScreen.HomeScreen
+import com.rajan.CoffeeShop.presentation.feature.homeScreen.HomeViewModel
+import com.rajan.CoffeeShop.presentation.feature.login.ui.LoginScreen
+import com.rajan.CoffeeShop.presentation.feature.login.LoginScreenViewModel
+import com.rajan.CoffeeShop.presentation.feature.profilescreen.ProfileScreen
+import com.rajan.CoffeeShop.presentation.feature.profilescreen.ProfileScreenViewModel
+import com.rajan.CoffeeShop.presentation.feature.signup.SignupViewModel
+import com.rajan.CoffeeShop.presentation.feature.signup.ui.SignupScreen
+import com.rajan.CoffeeShop.presentation.feature.welcomescreen.WelcomeScreen
+import com.rajan.CoffeeShop.presentation.feature.welcomescreen.WelcomeScreenViewModel
 
 @Composable
 fun NavGraph() {
@@ -59,9 +60,6 @@ fun NavGraph() {
                 navController = navController,
                 viewModel = viewModel
             )
-//            val viewModel: DetailsScreenViewModel = hiltViewModel()
-//            val args = backStackEntry.toRoute<Routes.DetailsScreen>()
-//            DetailsScreen(args.productId, navController, viewModel)
         }
         composable<Routes.CartScreen> {
             val viewModel: CartViewModel = hiltViewModel()
@@ -78,6 +76,11 @@ fun NavGraph() {
         composable<Routes.LoginScreen> {
             val viewModel: LoginScreenViewModel = hiltViewModel()
             LoginScreen(navController, viewModel)
+        }
+
+        composable<Routes.SignupScreen> {
+            val viewModel: SignupViewModel = hiltViewModel()
+            SignupScreen(navController, viewModel)
         }
 
     }
