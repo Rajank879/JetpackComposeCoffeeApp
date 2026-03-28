@@ -86,6 +86,17 @@ dependencies {
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
+
+    implementation(libs.accompanist.systemuicontroller)
+    //place autocomplete
+    implementation(libs.google.places)
+    //Coil for image
+    implementation(libs.coil.compose)
+    //Paging
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
+
+    implementation(libs.foundation.compose)
 }
 
 kapt {

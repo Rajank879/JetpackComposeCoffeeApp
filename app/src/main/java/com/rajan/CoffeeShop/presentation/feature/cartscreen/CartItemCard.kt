@@ -30,19 +30,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.rajan.CoffeeShop.domain.model.Product
-import com.rajan.CoffeeShop.presentation.theme.LightBrown
-import com.rajan.CoffeeShop.presentation.theme.LightGray
+import com.rajan.CoffeeShop.presentation.feature.home.ProductLocal
 
 
 @Composable
-fun CartItemCard(cartProduct: Product) {
+fun CartItemCard(cartProduct: ProductLocal) {
     var quantity by remember { mutableStateOf(1) }
 
     Card(
         modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp),
         colors = CardDefaults.cardColors(
-            containerColor = LightGray
+            containerColor =  MaterialTheme.colorScheme.surface
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
@@ -84,7 +82,7 @@ fun CartItemCard(cartProduct: Product) {
                     enabled = quantity>1,
                     modifier = Modifier
                         .background(
-                            color = LightBrown.copy(alpha = 0.15f),
+                            color =  MaterialTheme.colorScheme.surface.copy(alpha = 0.15f),
                             shape = CircleShape
                         )
                         .size(28.dp)
@@ -93,7 +91,7 @@ fun CartItemCard(cartProduct: Product) {
                         text = "-",
                         style = MaterialTheme.typography.titleLarge.copy(
                             fontWeight = FontWeight.Bold,
-                            color = LightBrown
+                            color =  MaterialTheme.colorScheme.surface
                         )
                     )
                 }
@@ -107,7 +105,7 @@ fun CartItemCard(cartProduct: Product) {
                     onClick = {quantity++},
                     modifier = Modifier
                         .background(
-                            color = LightBrown.copy(alpha = 0.15f),
+                            color =  MaterialTheme.colorScheme.surface.copy(alpha = 0.15f),
                             shape = CircleShape
                         )
                         .size(28.dp)
@@ -115,7 +113,7 @@ fun CartItemCard(cartProduct: Product) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "Add",
-                        tint = LightBrown
+                        tint =  MaterialTheme.colorScheme.surface
                     )
                 }
             }

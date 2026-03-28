@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -28,7 +29,6 @@ import androidx.navigation.NavController
 import com.rajan.CoffeeShop.R
 import com.rajan.CoffeeShop.data.local.datastore.OnboardingDataStore
 import com.rajan.CoffeeShop.presentation.navigation.Routes
-import com.rajan.CoffeeShop.presentation.theme.LightBrown
 import kotlinx.coroutines.launch
 import androidx.compose.ui.platform.LocalContext
 
@@ -80,7 +80,7 @@ fun WelcomeScreen(navController: NavController, viewModel: WelcomeScreenViewMode
                     .height(50.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = LightBrown
+                    containerColor =  MaterialTheme.colorScheme.primary
                 )
             ) {
                 Text(
@@ -102,7 +102,7 @@ fun WelcomeScreen(navController: NavController, viewModel: WelcomeScreenViewMode
                     .height(50.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = LightBrown
+                    containerColor =  MaterialTheme.colorScheme.primary
                 )
             ) {
                 Text(

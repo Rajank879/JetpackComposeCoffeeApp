@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rajan.CoffeeShop.R
-import com.rajan.CoffeeShop.domain.model.Product
 import com.rajan.CoffeeShop.presentation.feature.cartscreen.CartScreenTopBar
+import com.rajan.CoffeeShop.presentation.feature.home.ProductLocal
 import com.rajan.CoffeeShop.presentation.ui_components.MyBottomNavBar
 
 @Composable
@@ -24,21 +24,21 @@ fun FavouriteScreen(navController: NavController, viewModel: FavouriteScreenView
     var favouriteProducts by remember {
         mutableStateOf(
             listOf(
-                Product(
+                ProductLocal(
                     id = 1,
                     name = "Espresso",
                     description = "Strong & Rich",
                     price = 3.80,
                     imageRes = R.drawable.coffee_1
                 ),
-                Product(
+                ProductLocal(
                     id = 2,
                     name = "Latte",
                     description = "Smooth & Creamy",
                     price = 4.80,
                     imageRes = R.drawable.coffee_2
                 ),
-                Product(
+                ProductLocal(
                     id = 3,
                     name = "Copuccino",
                     description = "With Chocolate",

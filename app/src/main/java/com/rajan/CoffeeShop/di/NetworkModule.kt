@@ -2,6 +2,7 @@ package com.rajan.CoffeeShop.di
 
 import com.rajan.CoffeeShop.data.remote.api.ApiConstants.BASE_URL
 import com.rajan.CoffeeShop.data.remote.api.AuthApi
+import com.rajan.CoffeeShop.data.remote.api.ProductApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,5 +46,12 @@ object NetworkModule {
         retrofit: Retrofit
     ): AuthApi =
         retrofit.create(AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideProductApi(
+        retrofit: Retrofit
+    ): ProductApi =
+        retrofit.create(ProductApi::class.java)
 
 }

@@ -38,8 +38,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.rajan.CoffeeShop.presentation.navigation.Routes
 import com.rajan.CoffeeShop.presentation.feature.cartscreen.CartScreenTopBar
-import com.rajan.CoffeeShop.presentation.theme.LightBrown
-import com.rajan.CoffeeShop.presentation.theme.LightGray
 import com.rajan.CoffeeShop.presentation.ui_components.MyBottomNavBar
 
 @Composable
@@ -66,14 +64,14 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileScreenViewMode
                     modifier = Modifier
                         .size(124.dp)
                         .clip(CircleShape)
-                        .background(color = LightBrown.copy(alpha = 0.5f)),
+                        .background(color =  MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         imageVector = Icons.Default.Person,
                         contentDescription = "Profile",
                         modifier = Modifier.size(64.dp),
-                        tint = LightBrown
+                        tint =  MaterialTheme.colorScheme.surface
                     )
                 }
                 Spacer(modifier = Modifier.size(16.dp))
@@ -106,7 +104,7 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileScreenViewMode
             Spacer(modifier = Modifier.size(48.dp))
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = LightGray.copy(0.5f))
+                colors = CardDefaults.cardColors(containerColor =  MaterialTheme.colorScheme.surface.copy(0.5f))
             ) {
                 Column(modifier = Modifier.padding(24.dp)) {
                     Row(
@@ -117,7 +115,7 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileScreenViewMode
                         Icon(
                             imageVector = Icons.Default.ShoppingCart,
                             contentDescription = "Cart",
-                            tint = LightBrown,
+                            tint =  MaterialTheme.colorScheme.surface,
                             modifier = Modifier.size(30.dp)
                         )
                         Spacer(modifier = Modifier.width(16.dp))
@@ -136,7 +134,7 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileScreenViewMode
                         Icon(
                             imageVector = Icons.Default.Favorite,
                             contentDescription = "Favourite",
-                            tint = LightBrown,
+                            tint =  MaterialTheme.colorScheme.surface,
                             modifier = Modifier.size(30.dp)
                         )
                         Spacer(modifier = Modifier.width(16.dp))
@@ -158,7 +156,7 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileScreenViewMode
                         Icon(
                             imageVector = Icons.Default.Settings,
                             contentDescription = "Settings",
-                            tint = LightBrown,
+                            tint =  MaterialTheme.colorScheme.surface,
                             modifier = Modifier.size(30.dp)
                         )
                         Spacer(modifier = Modifier.width(16.dp))
@@ -180,7 +178,7 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileScreenViewMode
                         Icon(
                             imageVector = Icons.Default.Star,
                             contentDescription = "Themes",
-                            tint = LightBrown,
+                            tint =  MaterialTheme.colorScheme.surface,
                             modifier = Modifier.size(30.dp)
                         )
                         Spacer(modifier = Modifier.width(16.dp))

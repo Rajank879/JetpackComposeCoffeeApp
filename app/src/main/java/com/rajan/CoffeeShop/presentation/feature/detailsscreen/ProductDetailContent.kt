@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,12 +31,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rajan.CoffeeShop.R
-import com.rajan.CoffeeShop.domain.model.Product
-import com.rajan.CoffeeShop.presentation.theme.IvoryWhite
-import com.rajan.CoffeeShop.presentation.theme.LightGray
+import com.rajan.CoffeeShop.presentation.feature.home.ProductLocal
 
 @Composable
-fun ProductDetailContent(product: Product, innerPaddingValues: PaddingValues) {
+fun ProductDetailContent(product: ProductLocal, innerPaddingValues: PaddingValues) {
     Column(
         modifier = Modifier.fillMaxWidth()
             .padding(16.dp)
@@ -73,7 +72,7 @@ fun ProductDetailContent(product: Product, innerPaddingValues: PaddingValues) {
                 contentDescription = "Bean",
                 modifier = Modifier
                     .background(
-                        color = IvoryWhite,
+                        color = Color.White,
                         shape = RoundedCornerShape(10.dp)
                     )
                     .size(32.dp)
@@ -81,7 +80,7 @@ fun ProductDetailContent(product: Product, innerPaddingValues: PaddingValues) {
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-        HorizontalDivider(color = LightGray.copy(0.5f))
+        HorizontalDivider(color =  MaterialTheme.colorScheme.surface.copy(0.5f))
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Description",

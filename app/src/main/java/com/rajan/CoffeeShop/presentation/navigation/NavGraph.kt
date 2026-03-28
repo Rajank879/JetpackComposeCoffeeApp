@@ -18,8 +18,10 @@ import com.rajan.CoffeeShop.presentation.feature.detailsscreen.DetailsScreen
 import com.rajan.CoffeeShop.presentation.feature.detailsscreen.DetailsScreenViewModel
 import com.rajan.CoffeeShop.presentation.feature.favouritescreen.FavouriteScreen
 import com.rajan.CoffeeShop.presentation.feature.favouritescreen.FavouriteScreenViewModel
-import com.rajan.CoffeeShop.presentation.feature.homeScreen.HomeScreen
-import com.rajan.CoffeeShop.presentation.feature.homeScreen.HomeViewModel
+import com.rajan.CoffeeShop.presentation.feature.home.HomeEvent
+import com.rajan.CoffeeShop.presentation.feature.home.ui.HomeScreen
+import com.rajan.CoffeeShop.presentation.feature.home.HomeViewModel
+import com.rajan.CoffeeShop.presentation.feature.home.ui.SearchScreen
 import com.rajan.CoffeeShop.presentation.feature.login.ui.LoginScreen
 import com.rajan.CoffeeShop.presentation.feature.login.LoginScreenViewModel
 import com.rajan.CoffeeShop.presentation.feature.profilescreen.ProfileScreen
@@ -38,7 +40,8 @@ fun NavGraph() {
     val startDestination = remember(hasSeen) {
         if (hasSeen) Routes.HomeScreen else Routes.WelcomeScreen
     }
-
+    val viewModel: HomeViewModel = hiltViewModel()
+    val uiStateHome by viewModel.uiState.collectAsState()
     NavHost(
         navController = navController,
         startDestination = startDestination
@@ -48,7 +51,7 @@ fun NavGraph() {
             WelcomeScreen(navController, viewModel)
         }
         composable<Routes.HomeScreen> {
-            val viewModel: HomeViewModel = hiltViewModel()
+
             HomeScreen(navController, viewModel)
         }
         composable<Routes.DetailsScreen> { backStackEntry ->
@@ -81,6 +84,16 @@ fun NavGraph() {
         composable<Routes.SignupScreen> {
             val viewModel: SignupViewModel = hiltViewModel()
             SignupScreen(navController, viewModel)
+        }
+
+        composable<Routes.SearchScreen> {
+            SearchScreen(
+                navController = navController,
+                onSearchQueryChange = { query ->
+                    viewModel.onEvent(HomeEvent.OnSearchQueryChange(query))
+                },
+                categories = uiStateHome.categories,
+            )
         }
 
     }

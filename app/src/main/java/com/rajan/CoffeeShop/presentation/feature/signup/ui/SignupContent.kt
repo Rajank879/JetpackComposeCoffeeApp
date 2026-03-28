@@ -54,8 +54,8 @@ fun SignupContent(uiState: SignUpUiState, onEvent: (SignUpEvent) -> Unit) {
             value = uiState.firstName,
             onValueChange = { onEvent(SignUpEvent.OnFirstnameChanged(it)) },
             label = "First Name",
-            isError = uiState.error != null,
-            errorText = uiState.error ?: "Invalid First Name",
+            isError = uiState.firstNameError != null,
+            errorText = uiState.firstNameError ?: "Invalid First Name",
             keyboardType = KeyboardType.Text
         )
         Spacer(modifier = Modifier.height(12.dp))
@@ -63,8 +63,8 @@ fun SignupContent(uiState: SignUpUiState, onEvent: (SignUpEvent) -> Unit) {
             value = uiState.lastName,
             onValueChange = { onEvent(SignUpEvent.OnLastnameChanged(it)) },
             label = "Last Name",
-            isError = uiState.error != null,
-            errorText = uiState.error ?: "Invalid First Name",
+            isError = uiState.lastNameError != null,
+            errorText = uiState.lastNameError ?: "Invalid First Name",
             keyboardType = KeyboardType.Text
         )
         Spacer(modifier = Modifier.height(12.dp))
@@ -72,8 +72,8 @@ fun SignupContent(uiState: SignUpUiState, onEvent: (SignUpEvent) -> Unit) {
             value = uiState.email,
             onValueChange = { onEvent(SignUpEvent.OnEmailChanged(it)) },
             label = "Email",
-            isError = uiState.error != null,
-            errorText = uiState.error ?: "Invalid Email",
+            isError = uiState.emailError != null,
+            errorText = uiState.emailError ?: "Invalid Email",
             keyboardType = KeyboardType.Email
         )
         Spacer(modifier = Modifier.height(12.dp))
@@ -81,8 +81,8 @@ fun SignupContent(uiState: SignUpUiState, onEvent: (SignUpEvent) -> Unit) {
             value = uiState.password,
             onValueChange = { onEvent(SignUpEvent.OnPasswordChanged(it)) },
             label = "Password",
-            isError = uiState.error != null,
-            errorText = uiState.error ?: "Invalid Password",
+            isError = uiState.passwordError != null,
+            errorText = uiState.passwordError ?: "Invalid Password",
             keyboardType = KeyboardType.Password,
             isPassword = true
         )
@@ -91,8 +91,8 @@ fun SignupContent(uiState: SignUpUiState, onEvent: (SignUpEvent) -> Unit) {
             value = uiState.confirmPassword,
             onValueChange = { onEvent(SignUpEvent.OnConfirmPasswordChanged(it)) },
             label = "Confirm Password",
-            isError = uiState.error != null,
-            errorText = uiState.error ?: "Invalid Password",
+            isError = uiState.confirmPasswordError != null,
+            errorText = uiState.confirmPasswordError ?: "Invalid Password",
             keyboardType = KeyboardType.Password,
             isPassword = true
         )

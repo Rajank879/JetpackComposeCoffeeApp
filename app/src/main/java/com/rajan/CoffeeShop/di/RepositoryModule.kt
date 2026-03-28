@@ -2,6 +2,8 @@ package com.rajan.CoffeeShop.di
 
 import com.rajan.CoffeeShop.domain.repository.AuthRepository
 import com.rajan.CoffeeShop.data.repository.AuthRepositoryImpl
+import com.rajan.CoffeeShop.data.repository.ProductRepositoryImpl
+import com.rajan.CoffeeShop.domain.repository.ProductRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,4 +19,10 @@ abstract class RepositoryModule {
     abstract fun bindAuthRepository(
         authRepositoryImpl: AuthRepositoryImpl
     ): AuthRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindProductRepository(
+       productRepositoryImpl: ProductRepositoryImpl
+    ): ProductRepository
 }

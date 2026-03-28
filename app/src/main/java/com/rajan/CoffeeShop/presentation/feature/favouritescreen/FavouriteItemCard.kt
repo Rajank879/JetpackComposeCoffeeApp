@@ -23,17 +23,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.rajan.CoffeeShop.domain.model.Product
-import com.rajan.CoffeeShop.presentation.theme.LightGray
+import com.rajan.CoffeeShop.presentation.feature.home.ProductLocal
 
 @Composable
-fun FavouriteItemCard(favouriteItem: Product, onRemove: () -> Unit) {
+fun FavouriteItemCard(favouriteItem: ProductLocal, onRemove: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 6.dp),
         colors = CardDefaults.cardColors(
-            containerColor = LightGray
+            containerColor = MaterialTheme.colorScheme.surface
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {

@@ -5,7 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.rajan.CoffeeShop.common.utils.NetworkResult
 import com.rajan.CoffeeShop.domain.usecase.SignupUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -19,40 +21,43 @@ class SignupViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(SignUpUiState())
     val uiState = _uiState.asStateFlow()
 
+    private val _navigationState = MutableSharedFlow<SignupNavigation>()
+    val navigationState = _navigationState.asSharedFlow()
+
     fun onEvent(event: SignUpEvent) {
         when (event) {
             is SignUpEvent.OnFirstnameChanged -> {
                 _uiState.value = uiState.value.copy(
                     firstName = event.firstname,
-                    error = null
+                    firstNameError = null
                 )
             }
 
             is SignUpEvent.OnLastnameChanged -> {
                 _uiState.value = uiState.value.copy(
                     lastName = event.lastname,
-                    error = null
+                    lastNameError = null
                 )
             }
 
             is SignUpEvent.OnEmailChanged -> {
                 _uiState.value = uiState.value.copy(
                     email = event.email,
-                    error = null
+                    emailError = null
                 )
             }
 
             is SignUpEvent.OnPasswordChanged -> {
                 _uiState.value = uiState.value.copy(
                     password = event.newPassword,
-                    error = null
+                    passwordError = null
                 )
             }
 
             is SignUpEvent.OnConfirmPasswordChanged -> {
                 _uiState.value = uiState.value.copy(
                     confirmPassword = event.newConfirmPassword,
-                    error = null
+                    confirmPasswordError = null
                 )
             }
 
@@ -62,15 +67,45 @@ class SignupViewModel @Inject constructor(
                     error = null
                 )
             }
-            is SignUpEvent.OnLoginClicked -> {}
+            is SignUpEvent.OnLoginClicked -> {
+                viewModelScope.launch {
+                    _navigationState.emit(SignupNavigation.NavigateToHome)
+                }
+            }
 
         }
     }
 
     private fun validateSignUp() {
         val state = _uiState.value
+
+        if (state.firstName.isBlank()) {
+            _uiState.value = state.copy(firstNameError = "First name cannot be empty")
+            return
+        }
+
+        if (state.lastName.isBlank()){
+            _uiState.value = state.copy(lastNameError = "Last name cannot be empty")
+            return
+        }
+
+        if (state.email.isBlank()){
+            _uiState.value = state.copy(emailError = "Email cannot be empty")
+            return
+        }
+
+        if (state.password.isBlank()){
+            _uiState.value = state.copy(passwordError = "Password cannot be empty")
+            return
+        }
+
+        if (state.password.length<6){
+            _uiState.value = state.copy(passwordError = "Password must be at least 6 characters long")
+            return
+        }
+
         if (state.password != state.confirmPassword){
-            _uiState.value = state.copy(error = "Password and confirm password do not match")
+            _uiState.value = state.copy(confirmPasswordError = "Password and confirm password do not match")
             return
         }
 
@@ -85,6 +120,7 @@ class SignupViewModel @Inject constructor(
                         isLoading = false,
                         isSuccess = true
                     )
+                    _navigationState.emit(SignupNavigation.NavigateToLogin)
                 }
                 is NetworkResult.Error->{
                     _uiState.update {

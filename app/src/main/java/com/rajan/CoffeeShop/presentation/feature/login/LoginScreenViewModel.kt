@@ -50,7 +50,11 @@ class LoginScreenViewModel
                    _navigationState.emit(LoginNavigation.NavigateToRegister)
                }
             }
-            is LoginEvent.OnForgotPasswordClick -> {}
+            is LoginEvent.OnForgotPasswordClick -> {
+                viewModelScope.launch {
+                    _navigationState.emit(LoginNavigation.NavigateToForgotPassword)
+                }
+            }
             is LoginEvent.OnGoogleLoginClick -> {}
             is LoginEvent.OnAppleLoginClick -> {}
         }

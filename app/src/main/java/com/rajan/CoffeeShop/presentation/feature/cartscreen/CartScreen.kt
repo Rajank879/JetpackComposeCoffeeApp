@@ -17,29 +17,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.rajan.CoffeeShop.R
-import com.rajan.CoffeeShop.domain.model.Product
-import com.rajan.CoffeeShop.presentation.theme.LightBrown
+import com.rajan.CoffeeShop.presentation.feature.home.ProductLocal
 import com.rajan.CoffeeShop.presentation.ui_components.MyBottomNavBar
 
 @Composable
 fun CartScreen(navController: NavController, viewModel: CartViewModel) {
     // Displaying Product
     val cartProducts = listOf(
-        Product(
+        ProductLocal(
             id = 1,
             name = "Espresso",
             description = "Strong & Rich",
             price = 3.80,
             imageRes = R.drawable.coffee_1
         ),
-        Product(
+        ProductLocal(
             id = 2,
             name = "Latte",
             description = "Smooth & Creamy",
             price = 4.80,
             imageRes = R.drawable.coffee_2
         ),
-        Product(
+        ProductLocal(
             id = 3,
             name = "Copuccino",
             description = "With Chocolate",
@@ -65,7 +64,7 @@ fun CartScreen(navController: NavController, viewModel: CartViewModel) {
                     text = "Deliver",
                     fontSize = 30.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = LightBrown
+                    color =  MaterialTheme.colorScheme.surface
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 cartProducts.forEach { product ->

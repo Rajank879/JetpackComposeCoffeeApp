@@ -36,11 +36,7 @@ fun LoginScreen(navController: NavController, viewModel: LoginScreenViewModel) {
                     navController.navigate(Routes.SignupScreen)
                 }
 
-                is LoginNavigation.NavigateToForgotPassword -> {
-                    // in future
-                }
-
-                is LoginNavigation.NavigateToHome -> {
+                is LoginNavigation.NavigateToHome,LoginNavigation.NavigateToForgotPassword -> {
                     navController.navigate(Routes.HomeScreen) {
                         popUpTo(Routes.LoginScreen) { inclusive = true }
                     }

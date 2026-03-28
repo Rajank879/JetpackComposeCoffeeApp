@@ -32,7 +32,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rajan.CoffeeShop.R
-import com.rajan.CoffeeShop.presentation.theme.LightBrown
 
 @Composable
 fun PaymentMethodCard(totalAmount: Double) {
@@ -49,7 +48,7 @@ fun PaymentMethodCard(totalAmount: Double) {
                     painter = painterResource(if (selectedMode == "Online") R.drawable.mobile_banking else R.drawable.wallet),
                     contentDescription = selectedMode,
                     Modifier.size(32.dp),
-                    tint = LightBrown
+                    tint =  MaterialTheme.colorScheme.surface
                 )
 
                 Spacer(modifier = Modifier.width(8.dp))
@@ -61,7 +60,7 @@ fun PaymentMethodCard(totalAmount: Double) {
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = "$ $totalAmount",
-                        style = MaterialTheme.typography.bodyLarge.copy(color = LightBrown)
+                        style = MaterialTheme.typography.bodyLarge.copy(color =  MaterialTheme.colorScheme.surface)
                     )
                 }
                 Box {
@@ -90,12 +89,12 @@ fun PaymentMethodCard(totalAmount: Double) {
                                 },
                                 leadingIcon = {
                                     Icon(painter = painterResource(if (it == "Online") R.drawable.mobile_banking else R.drawable.wallet),
-                                        contentDescription = it, tint = LightBrown, modifier = Modifier.size(24.dp))
+                                        contentDescription = it, tint =  MaterialTheme.colorScheme.surface, modifier = Modifier.size(24.dp))
                                 },
                                 modifier = Modifier
                                     .padding(horizontal = 4.dp)
                                     .background(
-                                    color = if (selectedMode == it) LightBrown.copy(alpha = 0.2f) else Color.Transparent
+                                    color = if (selectedMode == it)  MaterialTheme.colorScheme.surface.copy(alpha = 0.2f) else Color.Transparent
                                 )
                             )
                         }
@@ -111,7 +110,7 @@ fun PaymentMethodCard(totalAmount: Double) {
                     .height(48.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = LightBrown,
+                    containerColor =  MaterialTheme.colorScheme.surface,
                     contentColor = Color.White
                 )
             ) {
