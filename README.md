@@ -50,6 +50,7 @@ data/
  ├── repository
  ├── remote/local sources
  
+---
 
 🔄 MVI Flow
 
@@ -66,13 +67,16 @@ User Intent → ViewModel → State Update → UI Render
 * Dagger Hilt
 * Retrofit (if API used)
 
+---
+
+## 📸 Screenshots
+
 <p align="center">
-  <img src="<img width="720" height="1600" alt="546505253-20e4713f-b2cc-4b39-835b-c8a786281d98" src="https://github.com/user-attachments/assets/d02cba16-2a2b-4c8f-9a17-4d91dd13a93f" />
-" width="250"/>
-  <img src="<img width="720" height="1600" alt="546505340-2d7ca006-5d1e-46a7-8971-7228789c5b72" src="https://github.com/user-attachments/assets/95c1adfd-ffd9-4a2d-a43e-210a5cad2b8e" />
-" width="250"/>
+  <img src="https://github.com/user-attachments/assets/d02cba16-2a2b-4c8f-9a17-4d91dd13a93f" width="260"/>
+  <img src="https://github.com/user-attachments/assets/95c1adfd-ffd9-4a2d-a43e-210a5cad2b8e" width="260"/>
 </p>
 
+---
 
 🚀 Getting Started
 
@@ -87,6 +91,8 @@ git clone https://github.com/Rajank879/JetpackComposeCoffeeApp.git
 
 Open in Android Studio and run the app.
 
+---
+
 📌 Key Learnings
 
 * Implementing MVI with MVVM
@@ -94,6 +100,8 @@ Open in Android Studio and run the app.
 * Efficient data loading using Paging 3
 * Building modern UI using Jetpack Compose
 * Structuring scalable apps using Clean Architecture
+* 
+---
 
 🎯 Future Improvements
 
@@ -102,9 +110,13 @@ Open in Android Studio and run the app.
 * 💳 Payment integration
 * 🤖 AI-based recommendations
 
+---
+
 🤝 Contributing
 
 Feel free to fork this repo and contribute!
+
+---
 
 📫 Connect with Me
 
